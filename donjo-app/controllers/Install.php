@@ -1,39 +1,39 @@
 <?php
 
 /*
- *
- * File ini bagian dari:
- *
- * OpenSID
- *
- * Sistem informasi desa sumber terbuka untuk memajukan desa
- *
- * Aplikasi dan source code ini dirilis berdasarkan lisensi GPL V3
- *
- * Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
- * Hak Cipta 2016 - 2024 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
- *
- * Dengan ini diberikan izin, secara gratis, kepada siapa pun yang mendapatkan salinan
- * dari perangkat lunak ini dan file dokumentasi terkait ("Aplikasi Ini"), untuk diperlakukan
- * tanpa batasan, termasuk hak untuk menggunakan, menyalin, mengubah dan/atau mendistribusikan,
- * asal tunduk pada syarat berikut:
- *
- * Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam
- * setiap salinan atau bagian penting Aplikasi Ini. Barang siapa yang menghapus atau menghilangkan
- * pemberitahuan ini melanggar ketentuan lisensi Aplikasi Ini.
- *
- * PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN
- * TERSIRAT. PENULIS ATAU PEMEGANG HAK CIPTA SAMA SEKALI TIDAK BERTANGGUNG JAWAB ATAS KLAIM, KERUSAKAN ATAU
- * KEWAJIBAN APAPUN ATAS PENGGUNAAN ATAU LAINNYA TERKAIT APLIKASI INI.
- *
- * @package   OpenSID
- * @author    Tim Pengembang OpenDesa
- * @copyright Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
- * @copyright Hak Cipta 2016 - 2024 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
- * @license   http://www.gnu.org/licenses/gpl.html GPL V3
- * @link      https://github.com/OpenSID/OpenSID
- *
- */
+*
+* File ini bagian dari:
+*
+* OpenSID
+*
+* Sistem informasi desa sumber terbuka untuk memajukan desa
+*
+* Aplikasi dan source code ini dirilis berdasarkan lisensi GPL V3
+*
+* Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+* Hak Cipta 2016 - 2024 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+*
+* Dengan ini diberikan izin, secara gratis, kepada siapa pun yang mendapatkan salinan
+* dari perangkat lunak ini dan file dokumentasi terkait ("Aplikasi Ini"), untuk diperlakukan
+* tanpa batasan, termasuk hak untuk menggunakan, menyalin, mengubah dan/atau mendistribusikan,
+* asal tunduk pada syarat berikut:
+*
+* Pemberitahuan hak cipta di atas dan pemberitahuan izin ini harus disertakan dalam
+* setiap salinan atau bagian penting Aplikasi Ini. Barang siapa yang menghapus atau menghilangkan
+* pemberitahuan ini melanggar ketentuan lisensi Aplikasi Ini.
+*
+* PERANGKAT LUNAK INI DISEDIAKAN "SEBAGAIMANA ADANYA", TANPA JAMINAN APA PUN, BAIK TERSURAT MAUPUN
+* TERSIRAT. PENULIS ATAU PEMEGANG HAK CIPTA SAMA SEKALI TIDAK BERTANGGUNG JAWAB ATAS KLAIM, KERUSAKAN ATAU
+* KEWAJIBAN APAPUN ATAS PENGGUNAAN ATAU LAINNYA TERKAIT APLIKASI INI.
+*
+* @package   OpenSID
+* @author    Tim Pengembang OpenDesa
+* @copyright Hak Cipta 2009 - 2015 Combine Resource Institution (http://lumbungkomunitas.net/)
+* @copyright Hak Cipta 2016 - 2024 Perkumpulan Desa Digital Terbuka (https://opendesa.id)
+* @license   http://www.gnu.org/licenses/gpl.html GPL V3
+* @link      https://github.com/OpenSID/OpenSID
+*
+*/
 
 use App\Models\Config;
 
@@ -96,7 +96,7 @@ class Install extends CI_Controller
     private function check_server()
     {
         foreach ($this->config->item('server') as $check) {
-            if (! $check['check']()) {
+            if (!$check['check']()) {
                 return false;
             }
         }
@@ -114,7 +114,7 @@ class Install extends CI_Controller
             show_404();
         }
 
-        if (! $this->check_server()) {
+        if (!$this->check_server()) {
             return redirect('install/server');
         }
 
@@ -126,7 +126,7 @@ class Install extends CI_Controller
     private function check_folders()
     {
         foreach ($this->config->item('folders') as $check) {
-            if (! $check['check']()) {
+            if (!$check['check']()) {
                 return false;
             }
         }
@@ -144,7 +144,7 @@ class Install extends CI_Controller
             show_404();
         }
 
-        if (! $this->check_server() || ! $this->check_folders()) {
+        if (!$this->check_server() || !$this->check_folders()) {
             return redirect('install/folders');
         }
 
@@ -163,7 +163,7 @@ class Install extends CI_Controller
             ->set_rules('database_name', 'Database name', 'required')
             ->set_rules('database_username', 'Database username', 'required');
 
-        if (! $this->form_validation->run()) {
+        if (!$this->form_validation->run()) {
             return view('installer.steps.database');
         }
 
@@ -203,7 +203,7 @@ class Install extends CI_Controller
 
     private function config_database($request = [])
     {
-        if (! $this->session->has_userdata('hostname') && isset($request['database_hostname'])) {
+        if (!$this->session->has_userdata('hostname') && isset($request['database_hostname'])) {
             $this->session->set_userdata([
                 'hostname' => $request['database_hostname'],
                 'port'     => $request['database_port'],
@@ -218,28 +218,28 @@ class Install extends CI_Controller
         $this->config->set_item(
             'database',
             <<<EOS
-                <?php
-                // -------------------------------------------------------------------------
-                //
-                // Letakkan username, password dan database sebetulnya di file ini.
-                // File ini JANGAN di-commit ke GIT. TAMBAHKAN di .gitignore
-                // -------------------------------------------------------------------------
+<?php
+// -------------------------------------------------------------------------
+//
+// Letakkan username, password dan database sebetulnya di file ini.
+// File ini JANGAN di-commit ke GIT. TAMBAHKAN di .gitignore
+// -------------------------------------------------------------------------
 
-                // Data Konfigurasi MySQL yang disesuaikan
+// Data Konfigurasi MySQL yang disesuaikan
 
-                {$db}['default']['hostname'] = '{$this->session->hostname}';
-                {$db}['default']['username'] = '{$this->session->username}';
-                {$db}['default']['password'] = '{$this->session->password}';
-                {$db}['default']['port']     = {$this->session->port};
-                {$db}['default']['database'] = '{$this->session->database}';
-                {$db}['default']['dbcollat'] = 'utf8_general_ci';
+{$db}['default']['hostname'] = '{$this->session->hostname}';
+{$db}['default']['username'] = '{$this->session->username}';
+{$db}['default']['password'] = '{$this->session->password}';
+{$db}['default']['port']     = {$this->session->port};
+{$db}['default']['database'] = '{$this->session->database}';
+{$db}['default']['dbcollat'] = 'utf8_general_ci';
 
-                /*
-                | Untuk setting koneksi database 'Strict Mode'
-                | Sesuaikan dengan ketentuan hosting
-                */
-                {$db}['default']['stricton'] = true;
-                EOS
+/*
+| Untuk setting koneksi database 'Strict Mode'
+| Sesuaikan dengan ketentuan hosting
+*/
+{$db}['default']['stricton'] = true;
+EOS
         );
 
         return [
@@ -278,9 +278,9 @@ class Install extends CI_Controller
         $this->load->database($this->config_database());
 
         if (
-            ! $this->db
-            || ! $this->check_server()
-            || ! $this->check_folders()
+            !$this->db
+            || !$this->check_server()
+            || !$this->check_folders()
         ) {
             return redirect('install/database');
         }
@@ -327,10 +327,10 @@ class Install extends CI_Controller
         $this->load->database();
 
         if (
-            ! $this->db
-            || ! file_exists(DESAPATH)
-            || ! $this->check_server()
-            || ! $this->check_folders()
+            !$this->db
+            || !file_exists(DESAPATH)
+            || !$this->check_server()
+            || !$this->check_folders()
         ) {
             return redirect('install/migrations');
         }
@@ -339,7 +339,7 @@ class Install extends CI_Controller
         $this->load->driver('cache', ['adapter' => 'file', 'backup' => 'dummy']);
 
         // disable install jika sudah mengubah password default
-        if (! password_verify('sid304', $this->db->where('config_id', identitas('id'))->get('user')->row()->password)) {
+        if (!password_verify('sid304', $this->db->where('config_id', identitas('id'))->get('user')->row()->password)) {
             show_404();
         }
 
@@ -357,7 +357,7 @@ class Install extends CI_Controller
             ->set_rules('password', 'Password', 'required|callback_syarat_sandi')
             ->set_rules('confirm_password', 'Konfirmasi Password', 'required|matches[password]');
 
-        if (! $this->form_validation->run()) {
+        if (!$this->form_validation->run()) {
             return view('installer.steps.user');
         }
 
@@ -388,7 +388,7 @@ class Install extends CI_Controller
 
     public function syarat_sandi($password)
     {
-        if (! preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/', $password)) {
+        if (!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,20}$/', $password)) {
             $this->form_validation->set_message('syarat_sandi', 'Harus 6 sampai 20 karakter dan sekurangnya berisi satu angka dan satu huruf besar dan satu huruf kecil');
 
             return false;

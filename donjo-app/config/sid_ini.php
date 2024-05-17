@@ -61,10 +61,10 @@ $config['useDatabaseConfig'] = true;
     Perlu di-setting di sini karena index.php dijalankan
     sesudah pembacaan konfigurasi dari database di setting_model.php
 */
-// $config["environment"] = "development";
+$config["environment"] = "development";
 
 // Untuk situs yang digunakan untuk demo, seperti https://demosid.opendesa.id
-$config['demo_mode'] = false;
+$config['demo_mode'] = true;
 
 // Data id penduduk dan pin layanan mandiri yang digunakan sebagai default akun demo
 $config['demo_akun'] = [
